@@ -1,5 +1,5 @@
-/*
-package com.tanmay.simple3.configs;
+
+/*package com.tanmay.simple3.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

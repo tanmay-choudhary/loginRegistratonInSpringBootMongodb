@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>admin page</title>
+</head>
+<body>
+  <h1 th:text = "'welcome ' + ${msg} + ' your system is working'"></h1>
+
+<form action = "delete" method = "get">
+<pre>
+<input type = "submit" value= "DeleteUser">
+</pre>
+</form>
+<form action = "update" method = "get">
+<pre>
+<input type = "submit" value= "UpdateUser">
+</pre>
+</form>
+<form action = "read" method = "get">
+<pre>
+<input type = "submit" value= "SeeAllUsers">
+</pre>
+</form>
+</body>
+</html>

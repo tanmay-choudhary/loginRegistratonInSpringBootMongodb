@@ -1,4 +1,3 @@
-
 package com.tanmay.simple3.domain;
 
 import java.util.Set;
@@ -9,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document(collection = "user")
-public class User {
+@Document(collection = "admin")
+public class Admin {
 
     @Id
     private String id;
@@ -18,13 +17,6 @@ public class User {
     private String email;
     private String password;
     private String fullname;
-    private boolean enabled;
-    @DBRef
-    private Set<Admin> admin;
-
-    public String getId() {
-        return id;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -46,35 +38,16 @@ public class User {
         this.password = password;
     }
 
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Set<Admin> getAdmin() {
-        return admin;
-    }
-
-    public void setRoles(Set<Admin> admin) {
-        this.admin = admin;
-    }
-
-	public void setRoles(Object admin2) {
-		// TODO Auto-generated method stub
-		
+	public String getFullname() {
+		return fullname;
 	}
-    
-    
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+ 
+ 
     
 }
+

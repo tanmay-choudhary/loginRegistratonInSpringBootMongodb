@@ -1,5 +1,5 @@
-/* 
-package com.tanmay.simple3.configs;
+
+/*package com.tanmay.simple3.configs;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -27,5 +27,4 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         }
     }
 
-}
-*/
+}*/

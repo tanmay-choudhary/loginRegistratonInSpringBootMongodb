@@ -20,8 +20,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tanmay.simple3.domain.User;
-import com.tanmay.simple3.domain.Role;
-import com.tanmay.simple3.repositories.RoleRepository;
+
+import com.tanmay.simple3.domain.Admin;
+import com.tanmay.simple3.repositories.AdminRepository;
 import com.tanmay.simple3.repositories.UserRepository;
 
 
@@ -32,41 +33,68 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
     
     @Autowired
-    private RoleRepository roleRepository;
-    
- //   @Autowired
- //   private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private AdminRepository adminRepository;
 
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public void saveAdmin(Admin admin) {
+        //  user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+  
+          adminRepository.save(admin);
+      }
+    public Admin findAdminByEmail(String email) {
+        return adminRepository.findByEmail(email);
     }
 
     public void saveUser(User user) {
       //  user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setPassword(user.getPassword());
         user.setEnabled(true);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
+    
+    
+	/*
+	 * public List<User> getAllStudents() { return UserRepository.findAll(); }
+	 */
+    
+    public void updateUser(User user) {
+        //  user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+          userRepository.save(user);
+      }
+    
+    public Void deleteUser (String id) 
+    {
+    	userRepository.deleteById(id);
+	    return null;
+    }
 
-    @Override
+    
+    
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+    
+   
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
+	}
+
+   @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(email);
         if (user != null) {
-            List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
+            List<GrantedAuthority> authorities = getUserAuthority(user.getAdmin());
             return buildUserForAuthentication(user, authorities);
         } else {
             throw new UsernameNotFoundException("username not found");
         }
     }
 
-    private List<GrantedAuthority> getUserAuthority(Set<com.tanmay.simple3.domain.Role> set) {
+   private List<GrantedAuthority> getUserAuthority(Set<com.tanmay.simple3.domain.Admin> set) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        set.forEach((role) -> {
-            roles.add(new SimpleGrantedAuthority(role.getRole()));
-        });
+       /* set.forEach((role) -> {
+            admins.add(new SimpleGrantedAuthority(admins.getAdmin()));
+        });*/
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
         return grantedAuthorities;
